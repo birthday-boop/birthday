@@ -1,0 +1,2504 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Happy Birthday Karim — 24</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Montserrat:wght@400;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ============================================================
+   DESIGN TOKENS
+   Primrose Yellow  #F7EC8D
+   Violet Bloom     #8B6EC7
+   Cornflower Blue  #5E84E2
+   Petal White      #F5F4ED
+   Marigold Orange  #F6A93A
+   ============================================================ */
+      :root {
+        --py: #f7ec8d; /* Primrose Yellow  */
+        --vb: #8b6ec7; /* Violet Bloom     */
+        --cb: #5e84e2; /* Cornflower Blue  */
+        --pw: #f5f4ed; /* Petal White      */
+        --mo: #f6a93a; /* Marigold Orange  */
+
+        /* Tints / alphas */
+        --py-t: rgba(247, 236, 141, 0.22);
+        --vb-t: rgba(139, 110, 199, 0.18);
+        --cb-t: rgba(94, 132, 226, 0.18);
+        --mo-t: rgba(246, 169, 58, 0.18);
+
+        /* Ink on light bg */
+        --ink: #2b2050; /* deep violet-tinted dark */
+        --ink-mid: rgba(43, 32, 80, 0.58);
+        --ink-soft: rgba(43, 32, 80, 0.32);
+        --ink-ghost: rgba(43, 32, 80, 0.09);
+
+        /* ---- layout */
+        --bg-body: var(--pw);
+        --bg-alt: #eeecea;
+        --surface: #ffffff;
+
+        /* ---- fonts */
+        --display: "Playfair Display", serif;
+        --sans: "Plus Jakarta Sans", sans-serif;
+        --heavy: "Montserrat", sans-serif;
+
+        /* ---- fluid spacing */
+        --sp-xs: clamp(0.4rem, 1.2vw, 0.6rem);
+        --sp-sm: clamp(0.7rem, 2vw, 1rem);
+        --sp-md: clamp(1rem, 3vw, 1.6rem);
+        --sp-lg: clamp(1.6rem, 5vw, 3rem);
+        --sp-xl: clamp(2.5rem, 8vw, 5.5rem);
+        --px: clamp(1.25rem, 6vw, 6rem);
+        --section-y: clamp(4rem, 11vw, 8.5rem);
+
+        /* ---- easing */
+        --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+
+      /* ── RESET ── */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        background: var(--bg-body);
+        color: var(--ink);
+        font-family: var(--sans);
+        overflow-x: hidden;
+        line-height: 1.65;
+        cursor: none;
+      }
+      img {
+        display: block;
+        width: 100%;
+      }
+      button {
+        border: none;
+        background: none;
+        font: inherit;
+        color: inherit;
+      }
+      @media (pointer: coarse) {
+        body {
+          cursor: auto;
+        }
+        #cur,
+        #cur-r {
+          display: none !important;
+        }
+      }
+
+      /* ============================================================
+   CURSOR
+   ============================================================ */
+      #cur {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--vb);
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: multiply;
+        transition: width 0.2s var(--ease-spring),
+          height 0.2s var(--ease-spring), background 0.25s;
+      }
+      #cur-r {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9998;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1.5px solid var(--vb);
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        opacity: 0.35;
+        transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out),
+          opacity 0.3s, border-color 0.3s;
+      }
+      body.hov #cur {
+        width: 22px;
+        height: 22px;
+        background: var(--mo);
+      }
+      body.hov #cur-r {
+        width: 54px;
+        height: 54px;
+        opacity: 0.6;
+        border-color: var(--mo);
+      }
+
+      /* ============================================================
+   LOADER
+   ============================================================ */
+      #loader {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: var(--vb);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.8rem;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        transition: clip-path 0.95s var(--ease-out) 0.1s, visibility 0.01s 1.1s;
+      }
+      #loader.exit {
+        clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+        visibility: hidden;
+      }
+
+      .ld-name {
+        font-family: var(--heavy);
+        font-weight: 900;
+        font-size: clamp(2.5rem, 13vw, 8rem);
+        letter-spacing: 0.13em;
+        color: transparent;
+        -webkit-text-stroke: 1.5px rgba(247, 236, 141, 0.65);
+        display: flex;
+      }
+      .ld-name span {
+        display: inline-block;
+        animation: lc 0.7s var(--ease-out) both;
+      }
+      .ld-name span:nth-child(1) {
+        animation-delay: 0.04s;
+      }
+      .ld-name span:nth-child(2) {
+        animation-delay: 0.11s;
+      }
+      .ld-name span:nth-child(3) {
+        animation-delay: 0.18s;
+      }
+      .ld-name span:nth-child(4) {
+        animation-delay: 0.25s;
+      }
+      .ld-name span:nth-child(5) {
+        animation-delay: 0.32s;
+      }
+      @keyframes lc {
+        from {
+          opacity: 0;
+          transform: translateY(55px) skewY(7deg);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .ld-sub {
+        font-family: var(--sans);
+        font-weight: 600;
+        font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: rgba(247, 236, 141, 0.45);
+      }
+      .ld-bar {
+        width: clamp(110px, 30vw, 190px);
+        height: 1.5px;
+        background: rgba(247, 236, 141, 0.12);
+        position: relative;
+        overflow: hidden;
+      }
+      .ld-bar::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, var(--py), transparent);
+        animation: scan 1.1s linear infinite;
+      }
+      @keyframes scan {
+        from {
+          transform: translateX(-100%);
+        }
+        to {
+          transform: translateX(200%);
+        }
+      }
+
+      /* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+      [data-a] {
+        opacity: 0;
+        will-change: opacity, transform;
+        transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+      }
+      [data-a="up"] {
+        transform: translateY(48px);
+      }
+      [data-a="left"] {
+        transform: translateX(-56px);
+      }
+      [data-a="right"] {
+        transform: translateX(56px);
+      }
+      [data-a="scale"] {
+        transform: scale(0.84);
+      }
+      [data-a="skew"] {
+        transform: translateY(38px) skewY(4deg);
+      }
+      [data-a="flip"] {
+        transform: perspective(700px) rotateX(18deg) translateY(28px);
+      }
+      [data-a].in {
+        opacity: 1;
+        transform: none;
+      }
+      [data-d="1"] {
+        transition-delay: 0.08s;
+      }
+      [data-d="2"] {
+        transition-delay: 0.18s;
+      }
+      [data-d="3"] {
+        transition-delay: 0.28s;
+      }
+      [data-d="4"] {
+        transition-delay: 0.38s;
+      }
+      [data-d="5"] {
+        transition-delay: 0.48s;
+      }
+
+      /* ============================================================
+   SHARED COMPONENTS
+   ============================================================ */
+      .sec-tag {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.57rem, 0.73vw, 0.69rem);
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--vb);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: var(--sp-sm);
+      }
+      .sec-tag::before {
+        content: "";
+        width: 28px;
+        height: 2px;
+        background: var(--vb);
+        flex-shrink: 0;
+      }
+
+      .sec-h {
+        font-family: var(--display);
+        font-weight: 900;
+        font-size: clamp(2.6rem, 7.5vw, 6rem);
+        line-height: 1;
+        color: var(--ink);
+        margin-bottom: var(--sp-lg);
+      }
+      .sec-h em {
+        font-style: italic;
+        color: var(--vb);
+      }
+
+      .wrap {
+        padding: var(--section-y) var(--px);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* ============================================================
+   ██ HERO
+   ============================================================ */
+      #hero {
+        min-height: 100svh;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        background: var(--pw);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* gradient mesh */
+      .h-mesh {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+            ellipse 70% 55% at 92% 10%,
+            rgba(247, 236, 141, 0.55) 0%,
+            transparent 55%
+          ),
+          radial-gradient(
+            ellipse 55% 65% at 0% 90%,
+            rgba(139, 110, 199, 0.18) 0%,
+            transparent 52%
+          ),
+          radial-gradient(
+            ellipse 45% 45% at 55% 50%,
+            rgba(94, 132, 226, 0.1) 0%,
+            transparent 55%
+          );
+        animation: mesh 13s ease-in-out infinite alternate;
+      }
+      @keyframes mesh {
+        from {
+          transform: scale(1);
+        }
+        to {
+          transform: scale(1.05) translate(0.8%, -1%);
+        }
+      }
+
+      /* dot grid */
+      .h-grid {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(
+          circle,
+          rgba(43, 32, 80, 0.1) 1px,
+          transparent 1px
+        );
+        background-size: clamp(30px, 5vw, 52px) clamp(30px, 5vw, 52px);
+        mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black 20%,
+          transparent 78%
+        );
+      }
+
+      /* giant watermark */
+      .h-wm {
+        position: absolute;
+        right: -0.04em;
+        bottom: -0.08em;
+        font-family: var(--heavy);
+        font-weight: 900;
+        font-size: clamp(16rem, 40vw, 38rem);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(139, 110, 199, 0.09);
+        line-height: 1;
+        user-select: none;
+        pointer-events: none;
+        animation: wm-float 9s ease-in-out infinite alternate;
+      }
+      @keyframes wm-float {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-22px);
+        }
+      }
+
+      /* floating blobs */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        animation: blob-f var(--bd, 8s) var(--bdl, 0s) ease-in-out infinite
+          alternate;
+      }
+      @keyframes blob-f {
+        from {
+          transform: translateY(0) scale(1);
+        }
+        to {
+          transform: translateY(-22px) scale(1.07);
+        }
+      }
+
+      /* hero inner */
+      .h-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(5rem, 13vw, 9rem) var(--px) var(--sp-lg);
+        position: relative;
+        z-index: 2;
+      }
+
+      .h-eye {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.6rem, 0.85vw, 0.72rem);
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--vb);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: var(--sp-sm);
+        opacity: 0;
+        transform: translateX(-38px);
+        animation: eye 0.85s var(--ease-out) 0.35s forwards;
+      }
+      .h-eye::before {
+        content: "";
+        width: 32px;
+        height: 2px;
+        background: var(--vb);
+        flex-shrink: 0;
+      }
+      @keyframes eye {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Marigold badge */
+      .h-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--mo);
+        color: #fff;
+        padding: 0.3rem 1rem;
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.57rem, 0.78vw, 0.7rem);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        margin-bottom: var(--sp-md);
+        width: fit-content;
+        opacity: 0;
+        animation: eye 0.7s var(--ease-out) 0.52s forwards;
+      }
+
+      /* Name */
+      .h-name {
+        font-family: var(--heavy);
+        font-weight: 900;
+        font-size: clamp(4.5rem, 17vw, 16rem);
+        line-height: 0.86;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        overflow: hidden;
+        margin-bottom: var(--sp-md);
+      }
+      .h-name-in {
+        display: block;
+        animation: name-slide 1.1s var(--ease-out) 0.62s both;
+      }
+      @keyframes name-slide {
+        from {
+          transform: translateY(108%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
+      /* Subtitle */
+      .h-sub {
+        font-family: var(--display);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(0.92rem, 2.2vw, 1.5rem);
+        color: var(--ink-mid);
+        max-width: 520px;
+        line-height: 1.6;
+        opacity: 0;
+        transform: translateY(18px);
+        animation: sub 0.9s var(--ease-out) 1s forwards;
+      }
+      @keyframes sub {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Stats */
+      .h-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(1.2rem, 5vw, 4rem);
+        margin-top: var(--sp-lg);
+        padding-top: var(--sp-lg);
+        border-top: 2px solid var(--ink-ghost);
+        opacity: 0;
+        animation: sub 0.8s var(--ease-out) 1.22s forwards;
+      }
+      .h-stat {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .h-snum {
+        font-family: var(--heavy);
+        font-weight: 900;
+        font-size: clamp(1.8rem, 4vw, 3.2rem);
+        line-height: 1;
+        color: var(--ink);
+      }
+      .h-snum em {
+        color: var(--vb);
+        font-style: normal;
+      }
+      .h-slbl {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.52rem, 0.68vw, 0.63rem);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      /* Hero footer */
+      .h-foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: clamp(0.7rem, 1.8vw, 1.1rem) var(--px);
+        border-top: 2px solid var(--ink-ghost);
+        position: relative;
+        z-index: 2;
+        opacity: 0;
+        animation: sub 0.7s ease 1.45s forwards;
+      }
+      .h-foot-l {
+        font-family: var(--sans);
+        font-weight: 600;
+        font-size: clamp(0.5rem, 0.66vw, 0.62rem);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+      .scroll-cue {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.5rem, 0.66vw, 0.62rem);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--vb);
+        animation: bob 2.6s ease-in-out infinite;
+      }
+      .scroll-cue svg {
+        width: 14px;
+        stroke: var(--vb);
+        fill: none;
+        stroke-width: 2;
+      }
+      @keyframes bob {
+        0%,
+        100% {
+          opacity: 0.45;
+          transform: translateY(0);
+        }
+        50% {
+          opacity: 1;
+          transform: translateY(6px);
+        }
+      }
+
+      /* ============================================================
+   ██ GALLERY
+   ============================================================ */
+      #gallery {
+        background: var(--pw);
+      }
+      .gal-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(8px, 1.4vw, 14px);
+      }
+      .gal-col {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(8px, 1.4vw, 14px);
+      }
+      .gal-col:last-child {
+        padding-top: clamp(40px, 8vw, 80px);
+      }
+
+      .g-item {
+        position: relative;
+        overflow: hidden;
+        background: var(--bg-alt);
+        cursor: none;
+      }
+
+      /* violet tint overlay */
+      .g-item::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(
+          135deg,
+          rgba(139, 110, 199, 0.12),
+          rgba(94, 132, 226, 0.1)
+        );
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      .g-item:hover::before {
+        opacity: 1;
+      }
+
+      /* shine */
+      .g-item::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+        background: linear-gradient(
+          115deg,
+          transparent 35%,
+          rgba(255, 255, 255, 0.25) 50%,
+          transparent 65%
+        );
+        transform: translateX(-120%);
+        transition: transform 0.78s var(--ease-out);
+      }
+      .g-item:hover::after {
+        transform: translateX(120%);
+      }
+
+      .g-item img {
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.1s var(--ease-out), filter 0.6s;
+        filter: saturate(0.65) brightness(0.93);
+        will-change: transform;
+      }
+      .g-item:hover img {
+        transform: scale(1.06);
+        filter: saturate(1.05) brightness(1.03);
+      }
+
+      /* yellow caption */
+      .g-cap {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 4;
+        padding: 1.5rem 1rem 0.85rem;
+        background: linear-gradient(transparent, rgba(43, 32, 80, 0.65));
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.5rem, 0.66vw, 0.62rem);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--py);
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.4s, transform 0.4s var(--ease-out);
+      }
+      .g-item:hover .g-cap {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ============================================================
+   ██ GLOW UP TIMELINE
+   ============================================================ */
+      #glowup {
+        background: var(--py);
+        position: relative;
+        overflow: hidden;
+      }
+
+      #glowup::before {
+        content: "GLOW UP";
+        position: absolute;
+        right: -1%;
+        bottom: 3%;
+        font-family: var(--display);
+        font-style: italic;
+        font-weight: 900;
+        font-size: clamp(5rem, 18vw, 16rem);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(43, 32, 80, 0.07);
+        line-height: 1;
+        pointer-events: none;
+        white-space: nowrap;
+        animation: wmdrift 14s ease-in-out infinite alternate;
+      }
+      @keyframes wmdrift {
+        from {
+          transform: translateX(0) rotate(-2deg);
+        }
+        to {
+          transform: translateX(-2%) rotate(-1deg);
+        }
+      }
+
+      #glowup .sec-tag {
+        color: var(--vb);
+      }
+      #glowup .sec-tag::before {
+        background: var(--vb);
+      }
+      #glowup .sec-h {
+        color: var(--ink);
+      }
+      #glowup .sec-h em {
+        color: var(--vb);
+      }
+
+      .tl-track {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: clamp(10px, 2.5vw, 24px);
+        position: relative;
+        margin-bottom: var(--sp-xl);
+      }
+      .tl-track::before {
+        content: "";
+        position: absolute;
+        top: clamp(130px, 32vw, 250px);
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent 2%,
+          var(--vb) 20%,
+          var(--cb) 50%,
+          var(--vb) 80%,
+          transparent 98%
+        );
+        opacity: 0;
+        transition: opacity 1.4s ease 0.3s;
+      }
+      .tl-track.lon::before {
+        opacity: 0.4;
+      }
+
+      .tl-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+      }
+      .tl-card:nth-child(even) {
+        flex-direction: column-reverse;
+      }
+      .tl-card:nth-child(even) .tl-meta {
+        margin-top: clamp(0.7rem, 2vw, 1.3rem);
+        margin-bottom: 0;
+      }
+      .tl-card:nth-child(odd) .tl-meta {
+        margin-bottom: clamp(0.7rem, 2vw, 1.3rem);
+      }
+
+      .tl-photo {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        clip-path: inset(100% 0 0 0);
+        transition: clip-path 1.15s var(--ease-out);
+        box-shadow: 0 8px 40px rgba(43, 32, 80, 0.14);
+      }
+      .tl-photo.uc {
+        clip-path: inset(0% 0 0 0);
+      }
+      .tl-card:nth-child(odd) .tl-photo {
+        aspect-ratio: 3/4;
+      }
+      .tl-card:nth-child(even) .tl-photo {
+        aspect-ratio: 4/5;
+        margin-top: clamp(26px, 5vw, 52px);
+      }
+      .tl-photo img {
+        transition: transform 0.9s var(--ease-out), filter 0.6s;
+        filter: saturate(0.5) brightness(0.83);
+      }
+      .tl-card:hover .tl-photo img {
+        transform: scale(1.07);
+        filter: saturate(1) brightness(1.05);
+      }
+      .tl-photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(43, 32, 80, 0.78) 0%,
+          transparent 55%
+        );
+      }
+
+      .tl-year {
+        position: absolute;
+        bottom: clamp(8px, 2vw, 14px);
+        left: clamp(8px, 2vw, 14px);
+        font-family: var(--heavy);
+        font-weight: 900;
+        font-size: clamp(1.3rem, 3.5vw, 2.5rem);
+        color: #fff;
+        z-index: 2;
+        line-height: 1;
+      }
+      .tl-card:last-child .tl-year {
+        color: var(--py);
+      }
+
+      /* Violet dot */
+      .tl-dot {
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--vb);
+        border: 3px solid var(--py);
+        flex-shrink: 0;
+        margin: 10px 0;
+        z-index: 2;
+        animation: dot1 2.4s ease-out infinite;
+      }
+      @keyframes dot1 {
+        0% {
+          box-shadow: 0 0 0 0 rgba(139, 110, 199, 0.45);
+        }
+        70% {
+          box-shadow: 0 0 0 10px transparent;
+        }
+        100% {
+          box-shadow: 0 0 0 0 transparent;
+        }
+      }
+      .tl-card:last-child .tl-dot {
+        background: var(--mo);
+        animation: dot2 2.4s ease-out infinite 0.4s;
+      }
+      @keyframes dot2 {
+        0% {
+          box-shadow: 0 0 0 0 rgba(246, 169, 58, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 10px transparent;
+        }
+        100% {
+          box-shadow: 0 0 0 0 transparent;
+        }
+      }
+
+      .tl-meta {
+        text-align: center;
+      }
+      .tl-meta h3 {
+        font-family: var(--heavy);
+        font-weight: 800;
+        font-size: clamp(0.76rem, 1.8vw, 1.05rem);
+        letter-spacing: 0.04em;
+        color: var(--ink);
+      }
+      .tl-meta p {
+        font-family: var(--sans);
+        font-size: clamp(0.62rem, 0.85vw, 0.75rem);
+        color: var(--ink-mid);
+        margin-top: 0.25rem;
+        font-style: italic;
+      }
+
+      /* Verdict */
+      .tl-verdict {
+        text-align: center;
+        padding-top: var(--sp-lg);
+        border-top: 2px solid rgba(43, 32, 80, 0.1);
+      }
+      .tl-verdict h3 {
+        font-family: var(--display);
+        font-weight: 900;
+        font-style: italic;
+        font-size: clamp(1.6rem, 5vw, 3.5rem);
+        color: var(--ink);
+        line-height: 1.1;
+      }
+      .tl-verdict h3 em {
+        color: var(--vb);
+      }
+      .tl-verdict p {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.56rem, 0.76vw, 0.68rem);
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        margin-top: 0.8rem;
+      }
+
+      /* ============================================================
+   ██ 24 THINGS — Violet Bloom dark section
+   ============================================================ */
+      #things {
+        background: var(--vb);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Animated yellow dot grid */
+      #things::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          circle,
+          rgba(247, 236, 141, 0.13) 1px,
+          transparent 1px
+        );
+        background-size: clamp(22px, 3.5vw, 34px) clamp(22px, 3.5vw, 34px);
+        animation: dotshift 18s linear infinite;
+        pointer-events: none;
+      }
+      @keyframes dotshift {
+        from {
+          background-position: 0 0;
+        }
+        to {
+          background-position: clamp(22px, 3.5vw, 34px) clamp(22px, 3.5vw, 34px);
+        }
+      }
+
+      #things .sec-tag {
+        color: var(--py);
+      }
+      #things .sec-tag::before {
+        background: var(--py);
+      }
+      #things .sec-h {
+        color: #fff;
+      }
+      #things .sec-h em {
+        color: var(--py);
+      }
+
+      .things-sub {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: clamp(0.92rem, 1.8vw, 1.2rem);
+        color: rgba(247, 236, 141, 0.55);
+        max-width: 440px;
+        line-height: 1.65;
+        margin-bottom: var(--sp-xl);
+      }
+
+      .things-grid {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fill,
+          minmax(clamp(130px, 20vw, 195px), 1fr)
+        );
+        gap: clamp(8px, 1.5vw, 13px);
+      }
+
+      .thing-card {
+        background: rgba(247, 236, 141, 0.07);
+        border: 1px solid rgba(247, 236, 141, 0.12);
+        padding: clamp(0.85rem, 2.2vw, 1.4rem);
+        position: relative;
+        overflow: hidden;
+        cursor: none;
+        transition: background 0.3s, border-color 0.3s,
+          transform 0.4s var(--ease-spring);
+      }
+      .thing-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(247, 236, 141, 0.1),
+          rgba(94, 132, 226, 0.08)
+        );
+        opacity: 0;
+        transition: opacity 0.35s;
+      }
+      .thing-card:hover {
+        background: rgba(247, 236, 141, 0.11);
+        border-color: rgba(247, 236, 141, 0.38);
+        transform: translateY(-5px);
+      }
+      .thing-card:hover::before {
+        opacity: 1;
+      }
+
+      .thing-num {
+        font-family: var(--heavy);
+        font-weight: 900;
+        font-size: clamp(1.6rem, 4vw, 2.6rem);
+        line-height: 1;
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(247, 236, 141, 0.3);
+        margin-bottom: 0.5rem;
+        transition: -webkit-text-stroke-color 0.3s;
+      }
+      .thing-card:hover .thing-num {
+        -webkit-text-stroke-color: rgba(247, 236, 141, 0.85);
+      }
+
+      .thing-txt {
+        font-family: var(--sans);
+        font-size: clamp(0.68rem, 1.05vw, 0.82rem);
+        font-weight: 500;
+        color: rgba(247, 236, 141, 0.6);
+        line-height: 1.5;
+        transition: color 0.3s;
+      }
+      .thing-card:hover .thing-txt {
+        color: rgba(247, 236, 141, 0.96);
+      }
+
+      /* ============================================================
+   ██ TRIVIA GAME — Cornflower Blue background
+   ============================================================ */
+      #game {
+        background: var(--cb);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Cornflower watermark */
+      #game::before {
+        content: "QUIZ";
+        position: absolute;
+        right: -0.04em;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: var(--heavy);
+        font-weight: 900;
+        font-size: clamp(8rem, 22vw, 20rem);
+        color: transparent;
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.07);
+        line-height: 1;
+        pointer-events: none;
+        animation: qwm 11s ease-in-out infinite alternate;
+      }
+      @keyframes qwm {
+        from {
+          transform: translateY(-50%) translateX(0);
+        }
+        to {
+          transform: translateY(-52%) translateX(-1.5%);
+        }
+      }
+
+      #game .sec-tag {
+        color: var(--py);
+      }
+      #game .sec-tag::before {
+        background: var(--py);
+      }
+      #game .sec-h {
+        color: #fff;
+      }
+      #game .sec-h em {
+        color: var(--py);
+      }
+
+      .game-layout {
+        display: grid;
+        grid-template-columns: 1fr 1.1fr;
+        gap: clamp(2rem, 6vw, 6rem);
+        align-items: center;
+      }
+      .game-body-txt {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: clamp(0.92rem, 1.8vw, 1.25rem);
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.7;
+        margin-bottom: var(--sp-md);
+      }
+      .game-detail {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.56rem, 0.76vw, 0.68rem);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      /* Console */
+      .console {
+        background: var(--pw);
+        border: 2px solid rgba(255, 255, 255, 0.22);
+        box-shadow: 0 6px 50px rgba(43, 32, 80, 0.18);
+        position: relative;
+        overflow: hidden;
+        transition: box-shadow 0.4s;
+      }
+      .console:hover {
+        box-shadow: 0 10px 60px rgba(43, 32, 80, 0.25);
+      }
+
+      /* Animated yellow–violet bar */
+      .console::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(
+          90deg,
+          var(--py),
+          var(--mo),
+          var(--vb),
+          var(--cb),
+          var(--py)
+        );
+        background-size: 200% 100%;
+        animation: cbar 3.5s linear infinite;
+      }
+      @keyframes cbar {
+        from {
+          background-position: 0%;
+        }
+        to {
+          background-position: 200%;
+        }
+      }
+
+      .c-head {
+        padding: clamp(0.7rem, 1.5vw, 1rem) clamp(0.9rem, 2vw, 1.4rem);
+        border-bottom: 1.5px solid var(--ink-ghost);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .c-lbl {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.52rem, 0.66vw, 0.62rem);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--vb);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .c-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--vb);
+        animation: blink 1.5s ease-in-out infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.12;
+        }
+      }
+      #q-trk {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.52rem, 0.66vw, 0.62rem);
+        letter-spacing: 0.15em;
+        color: var(--ink-soft);
+      }
+
+      #g-ui {
+        padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 2rem);
+        min-height: clamp(220px, 28vw, 275px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .g-title {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+        color: var(--ink);
+        margin-bottom: 0.4rem;
+      }
+      .g-sub {
+        font-family: var(--sans);
+        font-size: clamp(0.7rem, 1.1vw, 0.82rem);
+        color: var(--ink-soft);
+        margin-bottom: 1.4rem;
+      }
+      .q-text {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: clamp(0.92rem, 1.9vw, 1.2rem);
+        color: var(--ink);
+        margin-bottom: 1.4rem;
+        line-height: 1.5;
+      }
+
+      /* Violet filled btn */
+      .btn {
+        cursor: none;
+        display: inline-block;
+        background: var(--vb);
+        color: #fff;
+        padding: clamp(0.62rem, 1.4vw, 0.85rem) clamp(1.4rem, 2.8vw, 2.2rem);
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: clamp(0.65rem, 0.92vw, 0.78rem);
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.35s;
+        margin-top: 0.4rem;
+      }
+      .btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--ink);
+        transform: translateX(-101%);
+        transition: transform 0.42s var(--ease-out);
+      }
+      .btn:hover::before {
+        transform: translateX(0);
+      }
+      .btn span {
+        position: relative;
+        z-index: 1;
+      }
+      @media (pointer: coarse) {
+        .btn {
+          cursor: pointer;
+        }
+      }
+
+      .opts {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+      }
+      .opt-btn {
+        cursor: none;
+        text-align: left;
+        background: var(--pw);
+        border: 1.5px solid var(--ink-ghost);
+        padding: clamp(0.62rem, 1.4vw, 0.88rem) clamp(0.65rem, 1.3vw, 0.9rem);
+        font-family: var(--sans);
+        font-size: clamp(0.63rem, 0.98vw, 0.76rem);
+        font-weight: 500;
+        color: var(--ink-mid);
+        line-height: 1.3;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.3s, border-color 0.3s;
+      }
+      .opt-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(139, 110, 199, 0.1);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.35s var(--ease-out);
+      }
+      .opt-btn:hover {
+        border-color: var(--vb);
+        color: var(--ink);
+      }
+      .opt-btn:hover::before {
+        transform: scaleX(1);
+      }
+      .opt-btn span {
+        position: relative;
+        z-index: 1;
+      }
+      @media (pointer: coarse) {
+        .opt-btn {
+          cursor: pointer;
+        }
+      }
+
+      /* ============================================================
+   ██ OPEN WHEN — Petal White
+   ============================================================ */
+      #letters {
+        background: var(--pw);
+      }
+      #letters .sec-h {
+        color: var(--ink);
+      }
+
+      .letters-intro {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(1.5rem, 4vw, 4rem);
+        align-items: end;
+        margin-bottom: var(--sp-xl);
+      }
+      .letters-intro p {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: clamp(0.9rem, 1.7vw, 1.15rem);
+        color: var(--ink-mid);
+        line-height: 1.75;
+      }
+      @media (max-width: 640px) {
+        .letters-intro {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .acc-list {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+
+      .acc {
+        border-bottom: 2px solid var(--py);
+        position: relative;
+      }
+      .acc::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(to bottom, var(--vb), var(--mo));
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.5s var(--ease-out);
+      }
+      .acc.open::before {
+        transform: scaleY(1);
+      }
+
+      .acc-btn {
+        width: 100%;
+        text-align: left;
+        cursor: none;
+        padding: clamp(1rem, 2.5vw, 1.55rem) 0 clamp(1rem, 2.5vw, 1.55rem)
+          clamp(0.9rem, 2vw, 1.2rem);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        transition: padding-left 0.35s var(--ease-out);
+      }
+      .acc.open .acc-btn {
+        padding-left: clamp(1.3rem, 2.5vw, 1.9rem);
+      }
+      @media (pointer: coarse) {
+        .acc-btn {
+          cursor: pointer;
+        }
+      }
+
+      .acc-l {
+        display: flex;
+        align-items: center;
+        gap: clamp(0.75rem, 1.8vw, 1.3rem);
+      }
+      .acc-n {
+        font-family: var(--heavy);
+        font-weight: 900;
+        font-size: clamp(0.7rem, 1.1vw, 0.84rem);
+        color: var(--vb);
+        opacity: 0.75;
+        min-width: 22px;
+      }
+      .acc-t {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: clamp(0.96rem, 2vw, 1.35rem);
+        color: var(--ink);
+        transition: color 0.3s;
+      }
+      .acc.open .acc-t {
+        color: var(--vb);
+      }
+
+      .acc-ico {
+        width: 32px;
+        height: 32px;
+        border: 2px solid var(--py);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        color: var(--vb);
+        transition: transform 0.45s var(--ease-spring), background 0.3s,
+          border-color 0.3s, color 0.3s;
+      }
+      .acc.open .acc-ico {
+        transform: rotate(45deg);
+        background: var(--vb);
+        color: #fff;
+        border-color: var(--vb);
+      }
+
+      .acc-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.65s var(--ease-in-out);
+      }
+      .acc-body-in {
+        padding: 0 clamp(0.9rem, 2vw, 1.2rem) clamp(1.1rem, 3vw, 1.8rem)
+          clamp(2rem, 4vw, 3rem);
+        border-left: 2px solid rgba(139, 110, 199, 0.25);
+        margin-left: clamp(0.9rem, 2vw, 1.2rem);
+      }
+      .acc-body-in p {
+        font-family: var(--sans);
+        font-size: clamp(0.84rem, 1.35vw, 0.96rem);
+        font-weight: 400;
+        color: var(--ink-mid);
+        line-height: 1.88;
+      }
+
+      /* ============================================================
+   ██ FINAL — Marigold Orange section
+   ============================================================ */
+      #final {
+        background: var(--mo);
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle yellow shimmer */
+      #final::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 60% 50% at 50% 55%,
+          rgba(247, 236, 141, 0.28) 0%,
+          transparent 65%
+        );
+        pointer-events: none;
+        animation: glow-pulse 5s ease-in-out infinite alternate;
+      }
+      @keyframes glow-pulse {
+        from {
+          opacity: 0.7;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Spinning rings */
+      .f-ring {
+        position: absolute;
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        animation: rspin var(--rd, 35s) linear infinite;
+      }
+      @keyframes rspin {
+        from {
+          transform: translate(-50%, -50%) rotate(0);
+        }
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+      .f-ring:nth-child(1) {
+        width: clamp(240px, 55vmin, 500px);
+        height: clamp(240px, 55vmin, 500px);
+        border: 1.5px solid rgba(255, 255, 255, 0.18);
+        --rd: 32s;
+      }
+      .f-ring:nth-child(2) {
+        width: calc(clamp(240px, 55vmin, 500px) * 1.55);
+        height: calc(clamp(240px, 55vmin, 500px) * 1.55);
+        border: 1px solid rgba(139, 110, 199, 0.18);
+        --rd: 50s;
+        animation-direction: reverse;
+      }
+      .f-ring:nth-child(3) {
+        width: calc(clamp(240px, 55vmin, 500px) * 2.1);
+        height: calc(clamp(240px, 55vmin, 500px) * 2.1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        --rd: 68s;
+      }
+
+      /* Stars */
+      .f-star {
+        position: absolute;
+        border-radius: 50%;
+        animation: stw var(--sd, 3s) var(--sdl, 0s) ease-in-out infinite
+          alternate;
+      }
+      @keyframes stw {
+        from {
+          opacity: 0.1;
+        }
+        to {
+          opacity: 0.5;
+        }
+      }
+
+      .f-inner {
+        position: relative;
+        z-index: 2;
+        max-width: 680px;
+        padding: var(--section-y) var(--px);
+      }
+
+      .f-mark {
+        font-family: var(--display);
+        font-size: clamp(4rem, 10vw, 7rem);
+        line-height: 0.38;
+        color: rgba(43, 32, 80, 0.25);
+        display: block;
+        margin-bottom: var(--sp-lg);
+        animation: qfloat 6s ease-in-out infinite alternate;
+      }
+      @keyframes qfloat {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(-10px);
+        }
+      }
+
+      .f-quote {
+        font-family: var(--display);
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(1.1rem, 2.6vw, 1.75rem);
+        color: rgba(43, 32, 80, 0.85);
+        line-height: 1.8;
+        margin-bottom: var(--sp-xl);
+      }
+
+      .f-div {
+        width: 44px;
+        height: 2.5px;
+        background: linear-gradient(90deg, var(--vb), var(--ink));
+        margin: 0 auto var(--sp-md);
+      }
+
+      .f-sig {
+        font-family: var(--display);
+        font-style: italic;
+        font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+        color: var(--ink);
+        letter-spacing: 0.05em;
+        opacity: 0.75;
+      }
+
+      /* ============================================================
+   RESPONSIVE
+   ============================================================ */
+      @media (max-width: 1024px) {
+        .game-layout {
+          grid-template-columns: 1fr;
+        }
+        #game::before {
+          display: none;
+        }
+      }
+      @media (max-width: 768px) {
+        .gal-grid {
+          grid-template-columns: 1fr;
+        }
+        .gal-col:last-child {
+          padding-top: 0;
+        }
+        .tl-track {
+          grid-template-columns: 1fr 1fr;
+        }
+        .tl-card:nth-child(even) {
+          flex-direction: column;
+        }
+        .tl-card:nth-child(even) .tl-meta {
+          margin-top: clamp(0.6rem, 2vw, 1rem);
+          margin-bottom: 0;
+        }
+        .tl-card:nth-child(even) .tl-photo {
+          margin-top: 0;
+        }
+        .tl-track::before {
+          display: none;
+        }
+        .opts {
+          grid-template-columns: 1fr;
+        }
+        .h-stats {
+          gap: 1rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .tl-meta p {
+          display: none;
+        }
+        .tl-meta h3 {
+          font-size: 0.74rem;
+        }
+        .things-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 360px) {
+        .things-grid {
+          grid-template-columns: 1fr;
+        }
+        .tl-track {
+          gap: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cur"></div>
+    <div id="cur-r"></div>
+
+    <!-- ══ LOADER ══ -->
+    <div id="loader">
+      <div class="ld-name">
+        <span>K</span><span>A</span><span>R</span><span>I</span><span>M</span>
+      </div>
+      <div class="ld-sub">
+        Born 2003 &nbsp;·&nbsp; Turning 24 &nbsp;·&nbsp; 2026
+      </div>
+      <div class="ld-bar"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+    <section id="hero">
+      <div class="h-mesh"></div>
+      <div class="h-grid"></div>
+      <div class="h-wm">24</div>
+
+      <!-- blobs -->
+      <div
+        class="blob"
+        style="
+          width: clamp(80px, 14vw, 180px);
+          height: clamp(80px, 14vw, 180px);
+          background: radial-gradient(
+            circle,
+            rgba(247, 236, 141, 0.45),
+            transparent
+          );
+          top: 10%;
+          right: 7%;
+          --bd: 7s;
+          --bdl: 0s;
+        "
+      ></div>
+      <div
+        class="blob"
+        style="
+          width: clamp(50px, 8vw, 110px);
+          height: clamp(50px, 8vw, 110px);
+          background: radial-gradient(
+            circle,
+            rgba(246, 169, 58, 0.3),
+            transparent
+          );
+          top: 62%;
+          right: 18%;
+          --bd: 9s;
+          --bdl: 0.8s;
+        "
+      ></div>
+      <div
+        class="blob"
+        style="
+          width: clamp(60px, 9vw, 130px);
+          height: clamp(60px, 9vw, 130px);
+          background: radial-gradient(
+            circle,
+            rgba(94, 132, 226, 0.2),
+            transparent
+          );
+          top: 80%;
+          right: 3%;
+          --bd: 11s;
+          --bdl: 0.4s;
+        "
+      ></div>
+
+      <div class="h-inner">
+        <div class="h-eye">Happy Birthday &mdash; 2026</div>
+        <div class="h-badge">⭐ Level 24 Unlocked &mdash; Born 2003</div>
+        <div class="h-name"><span class="h-name-in">Karim</span></div>
+        <p class="h-sub">
+          Born in 2003 — making every year richer, bolder, and more
+          unforgettable. Today you are officially, brilliantly
+          <em style="color: var(--vb); font-style: italic">twenty-four.</em>
+        </p>
+        <div class="h-stats">
+          <div class="h-stat">
+            <div class="h-snum">2<em>4</em></div>
+            <div class="h-slbl">Years Old</div>
+          </div>
+          <div class="h-stat">
+            <div class="h-snum">2<em>0</em>03</div>
+            <div class="h-slbl">Birth Year</div>
+          </div>
+          <div class="h-stat">
+            <div class="h-snum"><em>∞</em></div>
+            <div class="h-slbl">Ahead of Him</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-foot">
+        <div class="h-foot-l">
+          Chapter XXIV &nbsp;·&nbsp; The Legend Continues
+        </div>
+        <div class="scroll-cue">
+          Scroll
+          <svg viewBox="0 0 24 24">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <polyline points="19,12 12,19 5,12" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     GALLERY
+═══════════════════════════════════════ -->
+    <section id="gallery" class="wrap">
+      <div class="sec-tag" data-a="up">01 — Memory Archive</div>
+      <h2 class="sec-h" data-a="skew">Moments</h2>
+
+      <div class="gal-grid">
+        <div class="gal-col">
+          <div class="g-item" data-a="up" style="aspect-ratio: 3/4">
+            <img
+              src="images/moments/01.jpeg"
+              alt="Memory 1"
+              style="height: 100%"
+            />
+            <div class="g-cap">Photo 001 — HEHEHEHE Photo</div>
+          </div>
+          <div class="g-item" data-a="up" data-d="1" style="aspect-ratio: 3/4">
+            <img
+              src="images/moments/03.jpeg"
+              alt="Memory 3"
+              style="height: 100%"
+            />
+            <div class="g-cap">Photo 003 — Ussss</div>
+          </div>
+          <div class="g-item" data-a="up" data-d="2" style="aspect-ratio: 1/1">
+            <img
+              src="images/moments/05.jpeg"
+              alt="Memory 5"
+              style="height: 100%"
+            />
+            <div class="g-cap">Photo 005 — Cuppiecake</div>
+          </div>
+        </div>
+        <div class="gal-col">
+          <div class="g-item" data-a="up" data-d="2" style="aspect-ratio: 4/3">
+            <img
+              src="images/moments/02.jpeg"
+              alt="Memory 2"
+              style="height: 100%"
+            />
+            <div class="g-cap">Photo 002 — Golden Hour</div>
+          </div>
+          <div class="g-item" data-a="up" data-d="1" style="aspect-ratio: 4/3">
+            <img
+              src="images/moments/04.jpeg"
+              alt="Memory 4"
+              style="height: 100%"
+            />
+            <div class="g-cap">Photo 004 — Cutiepieee</div>
+          </div>
+
+          <div class="g-item" data-a="up" data-d="3" style="aspect-ratio: 3/4">
+            <img
+              src="images/moments/06.jpeg"
+              alt="Memory 6"
+              style="height: 100%"
+            />
+            <div class="g-cap">Photo 006 — Finalllyyyyy</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     GLOW UP TIMELINE — Primrose Yellow bg
+═══════════════════════════════════════ -->
+    <section id="glowup" class="wrap">
+      <div class="sec-tag" data-a="up">02 — From Cute to Unstoppable</div>
+      <h2 class="sec-h" data-a="skew">The <em>Glow Up</em></h2>
+      <p
+        data-a="up"
+        data-d="1"
+        style="
+          font-family: var(--display);
+          font-style: italic;
+          color: var(--ink-mid);
+          font-size: clamp(0.92rem, 1.8vw, 1.2rem);
+          margin-bottom: var(--sp-xl);
+          max-width: 480px;
+          line-height: 1.7;
+        "
+      >
+        2003 to 2026. From adorable kid to certified main character. A journey
+        only Karim could pull off.
+      </p>
+
+      <div class="tl-track" id="tl-track">
+        <div class="tl-card" data-a="up">
+          <div class="tl-meta">
+            <h3>The Baby Era</h3>
+            <p>Pure joy, zero stress</p>
+          </div>
+          <div class="tl-dot"></div>
+          <div class="tl-photo" data-clip>
+            <img src="images/glowup/01.jpeg" alt="Baby Karim" />
+            <!-- <div class="tl-year">2003</div> -->
+          </div>
+        </div>
+        <div class="tl-card" data-a="up" data-d="1">
+          <div class="tl-meta">
+            <h3>The Kid Era</h3>
+            <p>Chaos in the best way</p>
+          </div>
+          <div class="tl-dot"></div>
+          <div class="tl-photo" data-clip>
+            <img src="images/glowup/02.jpeg" alt="Kid Karim" />
+            <!-- <div class="tl-year">2010</div> -->
+          </div>
+        </div>
+        <div class="tl-card" data-a="up" data-d="2">
+          <div class="tl-meta">
+            <h3>The Teen Era</h3>
+            <p>Transformation commences</p>
+          </div>
+          <div class="tl-dot"></div>
+          <div class="tl-photo" data-clip>
+            <img src="images/glowup/03.jpeg" alt="Teen Karim" />
+            <!-- <div class="tl-year">2018</div> -->
+          </div>
+        </div>
+        <div class="tl-card" data-a="up" data-d="3">
+          <div class="tl-meta">
+            <h3>The Glow Up ✦</h3>
+            <p>Main character — 2026</p>
+          </div>
+          <div class="tl-dot"></div>
+          <div class="tl-photo" data-clip>
+            <img src="images/glowup/04.jpeg" alt="Karim 2026" />
+            <div class="tl-year">2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-verdict" data-a="flip">
+        <h3>From <em>Cute</em> to Absolutely <em>Iconic</em></h3>
+        <p>
+          Born 2003 &nbsp;·&nbsp; Glowed Up 2026 &nbsp;·&nbsp; Never Looked Back
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     24 THINGS — Violet Bloom
+═══════════════════════════════════════ -->
+    <section id="things" class="wrap">
+      <div class="sec-tag" data-a="left">03 — A Special List</div>
+      <h2 class="sec-h" data-a="skew">
+        24 <em>Things</em><br /><span
+          style="
+            font-size: 0.52em;
+            color: rgba(247, 236, 141, 0.45);
+            font-style: italic;
+            font-family: var(--display);
+            font-weight: 400;
+          "
+          >About This Legend</span
+        >
+      </h2>
+      <p class="things-sub" data-a="up" data-d="1">
+        One for every year he's been lighting up the world.
+      </p>
+
+      <div class="things-grid">
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">01</div>
+          <div class="thing-txt">
+            Born in 2003 — the year the world quietly got much better
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">02</div>
+          <div class="thing-txt">
+            Has a smile that changes the energy of any room
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">03</div>
+          <div class="thing-txt">
+            Survived childhood chaos and came out thriving
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">04</div>
+          <div class="thing-txt">Loyal to the core — a truly rare quality</div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">05</div>
+          <div class="thing-txt">
+            Listens like it actually matters — because it does
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">06</div>
+          <div class="thing-txt">
+            Makes even bad days feel like stories worth telling
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">07</div>
+          <div class="thing-txt">
+            That one person everyone wants at the table
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">08</div>
+          <div class="thing-txt">
+            Ambition that only gets louder with each year
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">09</div>
+          <div class="thing-txt">
+            Would share his last bite without a second thought
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">10</div>
+          <div class="thing-txt">
+            Grew up and turned into someone genuinely cool
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">11</div>
+          <div class="thing-txt">
+            Years of memories that deserve a second watch
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">12</div>
+          <div class="thing-txt">
+            The glow up is not a phase — it's a permanent upgrade
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">13</div>
+          <div class="thing-txt">
+            Knows exactly when to push and when to breathe
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">14</div>
+          <div class="thing-txt">Deserves every good thing heading his way</div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">15</div>
+          <div class="thing-txt">
+            Turns ordinary moments into unforgettable ones
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">16</div>
+          <div class="thing-txt">
+            Handles pressure like it was already part of the plan
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">17</div>
+          <div class="thing-txt">
+            His taste in everything is genuinely elite
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">18</div>
+          <div class="thing-txt">
+            Has a way of making people feel truly seen
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">19</div>
+          <div class="thing-txt">
+            Still surprised by how far he's already come
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">20</div>
+          <div class="thing-txt">
+            Quietly building something bigger than he realises
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">21</div>
+          <div class="thing-txt">
+            The best version of Karim is still ahead — and it's breathtaking
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">22</div>
+          <div class="thing-txt">
+            Every room feels different when he walks in
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="1">
+          <div class="thing-num">23</div>
+          <div class="thing-txt">
+            Born in the right year at exactly the right time
+          </div>
+        </div>
+        <div class="thing-card" data-a="scale" data-d="2">
+          <div class="thing-num">24</div>
+          <div class="thing-txt">
+            Twenty-four and only just getting started. Happy Birthday, King ✦
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     TRIVIA — Cornflower Blue
+═══════════════════════════════════════ -->
+    <section id="game" class="wrap">
+      <div class="sec-tag" data-a="up">04 — Challenge</div>
+      <h2 class="sec-h" data-a="skew" style="margin-bottom: var(--sp-xl)">
+        Karim <em>Trivia</em>
+      </h2>
+
+      <div class="game-layout">
+        <div data-a="left">
+          <p class="game-body-txt">
+            Think you know the birthday boy? Three questions. No hints. Prove it
+            or go home.
+          </p>
+          <div class="game-detail">
+            Born 2003 &nbsp;·&nbsp; Age 24 &nbsp;·&nbsp; Legend Status:
+            Confirmed
+          </div>
+        </div>
+        <div data-a="right" data-d="1">
+          <div class="console">
+            <div class="c-head">
+              <div class="c-lbl">
+                <div class="c-dot"></div>
+                QUIZ TERMINAL — v2.4
+              </div>
+              <span id="q-trk">READY</span>
+            </div>
+            <div id="g-ui">
+              <div class="g-title">Ready, Player One?</div>
+              <div class="g-sub">How well do you know Karim?</div>
+              <button class="btn" onclick="startGame()">
+                <span>START →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     OPEN WHEN — Petal White
+═══════════════════════════════════════ -->
+    <section id="letters" class="wrap">
+      <div class="letters-intro">
+        <div>
+          <div class="sec-tag" data-a="up">05 — For Every Moment</div>
+          <h2 class="sec-h" data-a="skew">Open<br />When&hellip;</h2>
+        </div>
+        <div data-a="right" data-d="1">
+          <p>
+            Letters sealed with care for every season of the heart. Open the one
+            that speaks to where you are right now.
+          </p>
+        </div>
+      </div>
+
+      <div class="acc-list">
+        <!-- <div class="acc" data-a="up">
+          <button class="acc-btn">
+            <div class="acc-l">
+              <span class="acc-n">01</span
+              ><span class="acc-t">You need a laugh</span>
+            </div>
+            <div class="acc-ico">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                Remember that time everything went completely off the rails and
+                somehow ended up being the best story of the year? That's us.
+                Life with you has never been boring — and I'd choose every
+                single second of that chaos again, without hesitation.
+              </p>
+            </div>
+          </div>
+        </div> -->
+        <div class="acc" data-a="up" data-d="1">
+          <button class="acc-btn">
+            <div class="acc-l">
+              <span class="acc-n">01</span
+              ><span class="acc-t">You feel overwhelmed</span>
+            </div>
+            <div class="acc-ico">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                You have survived 100% of your hardest days, Karim. Every.
+                Single. One. Not just survived — you grew through them. Breathe
+                slow. You are so much more powerful than the noise in your head
+                right now. This moment will pass, and you will still be
+                standing.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="acc" data-a="up" data-d="2">
+          <button class="acc-btn">
+            <div class="acc-l">
+              <span class="acc-n">02</span
+              ><span class="acc-t">It's your birthday</span>
+            </div>
+            <div class="acc-ico">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                Today is entirely yours. Close every tab, silence every
+                notification, and just let yourself be celebrated. You've earned
+                every good thing heading your way. Eat the cake without the
+                guilt, accept the love without deflecting it. You deserve today
+                completely.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="acc" data-a="up" data-d="3">
+          <button class="acc-btn">
+            <div class="acc-l">
+              <span class="acc-n">03</span
+              ><span class="acc-t">You forget your worth</span>
+            </div>
+            <div class="acc-ico">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                Go back and look at that glow up section. That's not just how
+                you look — that's who you've become over 24 years. You are rare,
+                Karim. The specific, particular way you exist in the world is
+                truly one of a kind. Don't you dare forget that.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="acc" data-a="up" data-d="4">
+          <button class="acc-btn">
+            <div class="acc-l">
+              <span class="acc-n">04</span
+              ><span class="acc-t">You need motivation</span>
+            </div>
+            <div class="acc-ico">+</div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-in">
+              <p>
+                Every single day you are quietly building something that
+                matters. The results are already coming — you might just not be
+                seeing them yet. Stay the course. You were born in the right
+                year, with exactly the right fire, for exactly this moment in
+                your life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     FINAL — Marigold Orange
+═══════════════════════════════════════ -->
+    <section id="final">
+      <div class="f-ring"></div>
+      <div class="f-ring"></div>
+      <div class="f-ring"></div>
+      <div id="f-stars"></div>
+
+      <div class="f-inner">
+        <span class="f-mark" data-a="up">"</span>
+        <p class="f-quote" data-a="up" data-d="1">
+          <!-- Twenty-four years ago the world received something truly special — and
+          it has been getting richer every single year since. Watching you grow
+          from that little kid born in 2003 into the person you are today is one
+          of the greatest privileges. This year, may you receive everything
+          you've worked for, and everything you haven't yet dared to dream. -->
+          I don’t just love you for the easy moments — I love your mind, your
+          drive, and your quiet strength. I love the real you: ambitious,
+          stubborn, thoughtful, and wonderfully imperfect. I hope this year
+          challenges you and helps you grow into everything you’re meant to be.
+          You deserve more than comfort — you deserve expansion and greatness.
+          Happy Birthday. I’m so proud of you.
+        </p>
+        <div class="f-div" data-a="scale" data-d="2"></div>
+        <p class="f-sig" data-a="up" data-d="3">
+          Happy Birthday, Cutooo &mdash; Alfiya
+        </p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════ -->
+    <script>
+      /* ── LOADER ── */
+      window.addEventListener("load", () =>
+        setTimeout(
+          () => document.getElementById("loader").classList.add("exit"),
+          1500
+        )
+      );
+
+      /* ── CURSOR ── */
+      (function () {
+        const c = document.getElementById("cur"),
+          r = document.getElementById("cur-r");
+        if (!c || !r) return;
+        let mx = 0,
+          my = 0,
+          rx = 0,
+          ry = 0;
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          c.style.left = mx + "px";
+          c.style.top = my + "px";
+        });
+        (function tick() {
+          rx += (mx - rx) * 0.11;
+          ry += (my - ry) * 0.11;
+          r.style.left = rx + "px";
+          r.style.top = ry + "px";
+          requestAnimationFrame(tick);
+        })();
+        document
+          .querySelectorAll("button,.g-item,.tl-card,.acc-btn,.thing-card")
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () =>
+              document.body.classList.add("hov")
+            );
+            el.addEventListener("mouseleave", () =>
+              document.body.classList.remove("hov")
+            );
+          });
+      })();
+
+      /* ── SCROLL REVEAL ── */
+      (function () {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -45px 0px" }
+        );
+        document.querySelectorAll("[data-a]").forEach((el) => io.observe(el));
+      })();
+
+      /* ── CLIP REVEAL (timeline photos) ── */
+      (function () {
+        const cards = document.querySelectorAll("[data-clip]");
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e, i) => {
+              if (e.isIntersecting) {
+                setTimeout(() => e.target.classList.add("uc"), i * 210);
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12 }
+        );
+        cards.forEach((c) => io.observe(c));
+      })();
+
+      /* ── TIMELINE LINE ── */
+      (function () {
+        const track = document.getElementById("tl-track");
+        if (!track) return;
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) e.target.classList.add("lon");
+            });
+          },
+          { threshold: 0.25 }
+        );
+        io.observe(track);
+      })();
+
+      /* ── STARS ── */
+      (function () {
+        const wrap = document.getElementById("f-stars");
+        if (!wrap) return;
+        for (let i = 0; i < 60; i++) {
+          const s = document.createElement("div");
+          s.className = "f-star";
+          const sz = Math.random() * 2.5 + 1;
+          s.style.cssText = `width:${sz}px;height:${sz}px;background:#fff;
+      left:${Math.random() * 100}%;top:${Math.random() * 100}%;
+      --sd:${Math.random() * 3 + 2}s;--sdl:${Math.random() * 4}s;`;
+          wrap.appendChild(s);
+        }
+      })();
+
+      /* ── ACCORDION ── */
+      document.querySelectorAll(".acc-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const acc = btn.parentElement;
+          const body = acc.querySelector(".acc-body");
+          const ico = btn.querySelector(".acc-ico");
+          const isOpen = acc.classList.contains("open");
+          document.querySelectorAll(".acc.open").forEach((a) => {
+            a.classList.remove("open");
+            a.querySelector(".acc-body").style.maxHeight = null;
+            a.querySelector(".acc-ico").textContent = "+";
+          });
+          if (!isOpen) {
+            acc.classList.add("open");
+            body.style.maxHeight = body.scrollHeight + "px";
+            ico.textContent = "×";
+          }
+        });
+      });
+
+      /* ── TRIVIA ── */
+      (function () {
+        const qs = [
+          {
+            q: "What year was Karim born?",
+            opts: ["2001", "2002", "2003", "2004"],
+            ans: 2,
+          },
+          {
+            q: "How old is Karim turning in 2026?",
+            opts: ["22", "23", "24", "25"],
+            ans: 2,
+          },
+          {
+            q: "Which word best describes Karim?",
+            opts: ["Legend", "Ordinary", "Quiet", "Average"],
+            ans: 0,
+          },
+        ];
+        let qi = 0;
+        const ui = document.getElementById("g-ui");
+        const trk = document.getElementById("q-trk");
+
+        window.startGame = function () {
+          qi = 0;
+          render();
+        };
+
+        function render() {
+          if (qi >= qs.length) {
+            done();
+            return;
+          }
+          const q = qs[qi];
+          trk.textContent = `Q${qi + 1} / ${qs.length}`;
+          ui.innerHTML = `<p class="q-text">${q.q}</p>
+    <div class="opts">${q.opts
+      .map(
+        (o, i) =>
+          `<button class="opt-btn" onclick="pick(${i})"><span>${o}</span></button>`
+      )
+      .join("")}</div>`;
+        }
+
+        window.pick = function (i) {
+          if (i === qs[qi].ans) {
+            qi++;
+            ui.innerHTML = `<p style="font-family:var(--display);font-style:italic;font-size:1.5rem;color:var(--vb)">✓ Correct!</p>`;
+            setTimeout(render, 750);
+          } else {
+            ui.innerHTML = `<p style="font-family:var(--display);font-style:italic;font-size:1.5rem;color:var(--mo)">✗ Try Again</p>`;
+            setTimeout(render, 750);
+          }
+        };
+
+        function done() {
+          trk.textContent = "COMPLETE";
+          ui.innerHTML = `
+      <p style="font-family:var(--display);font-style:italic;font-size:1.6rem;color:var(--vb);margin-bottom:.4rem">You Win! 🎉</p>
+      <p style="font-family:var(--sans);font-size:.82rem;color:var(--ink-soft);margin-bottom:1.2rem">You know the legend well.</p>
+      <button class="btn" onclick="startGame()"><span>PLAY AGAIN</span></button>`;
+        }
+      })();
+    </script>
+    <audio id="bgSound" autoplay loop muted>
+      <source src="mild-music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      document.addEventListener(
+        "click",
+        function () {
+          const audio = document.getElementById("bgSound");
+          audio.muted = false;
+          audio.play();
+        },
+        { once: true }
+      );
+    </script>
+  </body>
+</html>
